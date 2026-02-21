@@ -7,7 +7,7 @@
   --sand: #f7f1e7;
   --ember: #e85d3f;
   --white: #ffffff;
-  --muted: #6a7480;
+  --muted: #4a5568; /* Improved contrast for muted text */
   --radius-lg: 22px;
   --radius-md: 14px;
   --radius-sm: 10px;
@@ -165,19 +165,22 @@ img {
   padding: 82px 0 78px;
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(118deg, rgba(15, 22, 56, 0.58), rgba(18, 16, 47, 0.58)),
-    url("../../Screenshot 2026-02-16 211409.png");
-  background-size: cover;
-  background-position: center;
+  /* UPDATED: Removed static image, using deep gradients */
+  background: linear-gradient(118deg, rgba(15, 22, 56, 0.95), rgba(18, 16, 47, 0.95));
 }
 
 .home-hero {
-  background:
-    linear-gradient(118deg, rgba(8, 10, 32, 0.96) 0%, rgba(17, 16, 48, 0.9) 46%, rgba(11, 17, 36, 0.97) 100%),
-    url("../../Screenshot 2026-02-16 211409.png");
-  background-size: cover;
-  background-position: center;
+  /* UPDATED: Removed static image, added dynamic moving gradient */
+  background: linear-gradient(-45deg, #0b1124, #1a103c, #14283b, #1e1404);
+  background-size: 400% 400%;
+  animation: dynamicGradient 15s ease infinite;
+}
+
+/* ADDED: Animation for the new interactive hero background */
+@keyframes dynamicGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .home-hero::before {
@@ -249,11 +252,13 @@ img {
 }
 
 .home-hero .hero-copy p {
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff; /* UPDATED: Changed to pure white for visibility */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* UPDATED: Added text shadow */
 }
 
 .home-hero .hero-copy h1 {
-  color: #fff;
+  color: #ffffff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* UPDATED: Added text shadow */
 }
 
 .hero-display {
@@ -265,7 +270,7 @@ img {
 
 .hero-display span {
   color: #ffbc25;
-  text-shadow: 0 0 22px rgba(255, 185, 63, 0.35);
+  text-shadow: 0 0 22px rgba(255, 185, 63, 0.8); /* UPDATED: Stronger glow */
 }
 
 .mystic-particles {
@@ -821,13 +826,13 @@ textarea {
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95); /* UPDATED: Improved footer link contrast */
 }
 
 .footer small {
   display: block;
   margin-top: 12px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.9); /* UPDATED: Improved from 0.65 to 0.9 for readability */
 }
 
 .note {
