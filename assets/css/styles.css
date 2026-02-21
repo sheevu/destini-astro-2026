@@ -7,7 +7,7 @@
   --sand: #f7f1e7;
   --ember: #e85d3f;
   --white: #ffffff;
-  --muted: #4a5568; /* Improved contrast for muted text */
+  --muted: #4a5568; 
   --radius-lg: 22px;
   --radius-md: 14px;
   --radius-sm: 10px;
@@ -161,22 +161,23 @@ img {
   box-shadow: 0 8px 24px rgba(255, 186, 45, 0.32);
 }
 
+/* =========================================
+   HERO SECTION - LIGHT INDIAN TOUCH
+========================================= */
 .page-hero {
   padding: 82px 0 78px;
   position: relative;
   overflow: hidden;
-  /* UPDATED: Removed static image, using deep gradients */
-  background: linear-gradient(118deg, rgba(15, 22, 56, 0.95), rgba(18, 16, 47, 0.95));
+  background: #fffdf8;
 }
 
 .home-hero {
-  /* UPDATED: Removed static image, added dynamic moving gradient */
-  background: linear-gradient(-45deg, #0b1124, #1a103c, #14283b, #1e1404);
-  background-size: 400% 400%;
-  animation: dynamicGradient 15s ease infinite;
+  /* Modern flowing gradient background with Sandalwood, Peach, Lotus Pink, and Saffron tones */
+  background: linear-gradient(-45deg, #fff5ec, #ffe8d6, #fce4ec, #ffecd2);
+  background-size: 300% 300%;
+  animation: dynamicGradient 18s ease-in-out infinite;
 }
 
-/* ADDED: Animation for the new interactive hero background */
 @keyframes dynamicGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -189,11 +190,11 @@ img {
   left: -20%;
   top: -10%;
   border-radius: 0;
-  filter: none;
+  filter: blur(40px);
   background:
-    radial-gradient(circle at 12% 50%, rgba(241, 171, 33, 0.3), transparent 30%),
-    radial-gradient(circle at 80% 40%, rgba(95, 116, 255, 0.18), transparent 36%),
-    radial-gradient(circle at 68% 74%, rgba(220, 111, 55, 0.24), transparent 24%);
+    radial-gradient(circle at 12% 50%, rgba(255, 152, 0, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 40%, rgba(233, 30, 99, 0.08), transparent 36%),
+    radial-gradient(circle at 68% 74%, rgba(212, 167, 75, 0.15), transparent 24%);
   animation: nebulaDrift 14s ease-in-out infinite alternate;
 }
 
@@ -203,33 +204,8 @@ img {
   left: 0;
   bottom: 0;
   border-radius: 0;
-  filter: none;
-  opacity: 0.6;
-  background: linear-gradient(180deg, rgba(7, 8, 23, 0.05), rgba(7, 8, 23, 0.62));
-}
-
-.page-hero::before,
-.page-hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(2px);
-}
-
-.page-hero::before {
-  width: 360px;
-  height: 360px;
-  right: -90px;
-  top: -120px;
-  background: radial-gradient(circle, rgba(31, 182, 170, 0.26), transparent 70%);
-}
-
-.page-hero::after {
-  width: 260px;
-  height: 260px;
-  left: -80px;
-  bottom: -120px;
-  background: radial-gradient(circle, rgba(232, 93, 63, 0.2), transparent 70%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.6));
+  pointer-events: none;
 }
 
 .hero-layout {
@@ -241,24 +217,26 @@ img {
   align-items: center;
 }
 
+/* Glassmorphism Effect for Content Boxes */
 .hero-copy {
   padding: 40px;
+  border-radius: var(--radius-lg);
 }
 
 .home-hero .hero-copy {
-  background: rgba(8, 14, 37, 0.7);
-  border: 1px solid rgba(255, 201, 78, 0.3);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 24px 50px rgba(189, 137, 57, 0.12);
 }
 
 .home-hero .hero-copy p {
-  color: #ffffff; /* UPDATED: Changed to pure white for visibility */
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8); /* UPDATED: Added text shadow */
+  color: #3b2a1a; /* Deep grounded brown */
+  font-weight: 500;
 }
 
 .home-hero .hero-copy h1 {
-  color: #ffffff;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); /* UPDATED: Added text shadow */
+  color: #4a1c0d; /* Deep Maroon/Henna */
 }
 
 .hero-display {
@@ -269,8 +247,8 @@ img {
 }
 
 .hero-display span {
-  color: #ffbc25;
-  text-shadow: 0 0 22px rgba(255, 185, 63, 0.8); /* UPDATED: Stronger glow */
+  color: #e65100; /* Vivid Saffron */
+  text-shadow: 0 2px 10px rgba(230, 81, 0, 0.15);
 }
 
 .mystic-particles {
@@ -285,8 +263,8 @@ img {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 208, 104, 1), rgba(255, 208, 104, 0));
-  box-shadow: 0 0 16px rgba(255, 190, 82, 0.58);
+  background: radial-gradient(circle, rgba(255, 171, 0, 1), rgba(255, 171, 0, 0));
+  box-shadow: 0 0 16px rgba(255, 171, 0, 0.6);
   animation: twinkle 6s ease-in-out infinite;
 }
 
@@ -306,9 +284,10 @@ img {
   text-transform: uppercase;
   border-radius: 999px;
   padding: 6px 12px;
-  background: rgba(255, 172, 39, 0.15);
-  color: rgba(255, 224, 161, 0.95);
-  border: 1px solid rgba(255, 196, 90, 0.32);
+  background: rgba(230, 81, 0, 0.1);
+  color: #d84315;
+  border: 1px solid rgba(230, 81, 0, 0.2);
+  font-weight: 700;
 }
 
 h1,
@@ -331,11 +310,6 @@ h3 {
   font-size: clamp(1.15rem, 1.6vw, 1.34rem);
 }
 
-.hero-copy p {
-  margin: 0 0 18px;
-  color: var(--ink-soft);
-}
-
 .hero-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(100px, 1fr));
@@ -344,21 +318,21 @@ h3 {
 }
 
 .metric {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  border: 1px solid rgba(212, 167, 75, 0.3);
   padding: 12px;
 }
 
 .metric strong {
   display: block;
   font-size: 1.1rem;
-  color: var(--ink);
+  color: #4a1c0d;
 }
 
 .metric span {
   font-size: 0.78rem;
-  color: var(--muted);
+  color: #6a4a23;
 }
 
 .btn-row {
@@ -379,7 +353,6 @@ h3 {
   align-items: center;
   justify-content: center;
   transition: transform var(--transition), box-shadow var(--transition);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover {
@@ -387,21 +360,21 @@ h3 {
 }
 
 .btn-primary {
-  background: linear-gradient(120deg, #f09f1a, #ffd25f 52%, #f3a70e);
-  color: #1f1604;
-  border: 1px solid rgba(255, 214, 133, 0.8);
-  box-shadow: 0 14px 30px rgba(240, 161, 32, 0.34);
+  background: linear-gradient(120deg, #e65100, #ff9800);
+  color: #fff;
+  border: 1px solid rgba(255, 152, 0, 0.8);
+  box-shadow: 0 10px 25px rgba(230, 81, 0, 0.3);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 16px 36px rgba(240, 161, 32, 0.44);
+  box-shadow: 0 14px 30px rgba(230, 81, 0, 0.4);
 }
 
 .btn-secondary {
-  background: linear-gradient(120deg, #1e264f, #2d4a8a);
-  color: var(--white);
-  border: 1px solid rgba(129, 151, 255, 0.42);
-  box-shadow: 0 12px 22px rgba(11, 27, 43, 0.28);
+  background: #ffffff;
+  color: #4a1c0d;
+  border: 1px solid rgba(212, 167, 75, 0.6);
+  box-shadow: 0 10px 20px rgba(212, 167, 75, 0.15);
 }
 
 .btn-outline {
@@ -415,18 +388,18 @@ h3 {
   padding: 34px;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
 .home-hero .hero-side {
-  background: rgba(11, 17, 41, 0.72);
-  border: 1px solid rgba(255, 181, 52, 0.32);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 24px 50px rgba(189, 137, 57, 0.1);
 }
 
-.hero-side::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(150deg, rgba(212, 167, 75, 0.12), rgba(31, 182, 170, 0.16));
+.home-hero .hero-side h2 {
+  color: #4a1c0d;
 }
 
 .hero-side > * {
@@ -446,7 +419,7 @@ h3 {
 .orbit-ring {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(255, 186, 63, 0.2);
+  border: 1px solid rgba(230, 81, 0, 0.25);
 }
 
 .ring-1 {
@@ -479,8 +452,9 @@ h3 {
   position: absolute;
   left: calc(50% - 45px);
   top: 86px;
-  background: radial-gradient(circle, rgba(255, 211, 98, 0.9), rgba(255, 168, 22, 0.2));
-  box-shadow: 0 0 26px rgba(255, 176, 53, 0.45);
+  background: linear-gradient(135deg, #fff, #ffe0b2);
+  border: 2px solid rgba(255, 152, 0, 0.4);
+  box-shadow: 0 0 30px rgba(255, 152, 0, 0.3);
   display: grid;
   place-items: center;
 }
@@ -507,9 +481,25 @@ h3 {
 }
 
 .home-hero .checklist li {
-  color: rgba(255, 255, 255, 0.9);
-  border-left-color: #ffb42b;
+  color: #5d2a02;
+  font-weight: 500;
+  border-left-color: #e65100;
 }
+
+.note {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.home-hero .note {
+  color: #8d5d36;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+/* =========================================
+   REMAINDER OF SITE STYLES
+========================================= */
 
 .grid {
   display: grid;
@@ -826,22 +816,13 @@ textarea {
 }
 
 .footer a {
-  color: rgba(255, 255, 255, 0.95); /* UPDATED: Improved footer link contrast */
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .footer small {
   display: block;
   margin-top: 12px;
-  color: rgba(255, 255, 255, 0.9); /* UPDATED: Improved from 0.65 to 0.9 for readability */
-}
-
-.note {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.home-hero .note {
-  color: rgba(255, 236, 189, 0.84);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .chatbot-widget {
