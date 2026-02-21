@@ -44,6 +44,10 @@ img {
   display: block;
 }
 
+p {
+  color: #2d3748;
+}
+
 .container {
   width: var(--container);
   margin-inline: auto;
@@ -69,7 +73,7 @@ img {
   top: 0;
   z-index: 40;
   backdrop-filter: blur(10px);
-  background: rgba(11, 17, 41, 0.86);
+  background: rgba(11, 17, 41, 0.95);
   border-bottom: 1px solid rgba(212, 167, 75, 0.26);
 }
 
@@ -95,6 +99,8 @@ img {
   width: 52px;
   height: 52px;
   object-fit: contain;
+  background: #ffc043;
+  border-radius: 50%;
 }
 
 .brand-title {
@@ -162,29 +168,32 @@ img {
 }
 
 /* =========================================
-   HERO SECTION - LIGHT INDIAN TOUCH
+   UPDATED HERO SECTION - LIGHT INDIAN THEME
 ========================================= */
 .page-hero {
   padding: 82px 0 78px;
   position: relative;
   overflow: hidden;
-  background: #fffdf8;
+  background-image: none !important; /* Forces the old image out */
+  background-color: #fffdf8;
 }
 
 .home-hero {
-  /* Modern flowing gradient background with Sandalwood, Peach, Lotus Pink, and Saffron tones */
-  background: linear-gradient(-45deg, #fff5ec, #ffe8d6, #fce4ec, #ffecd2);
-  background-size: 300% 300%;
-  animation: dynamicGradient 18s ease-in-out infinite;
+  /* Modern moving gradient: Sandalwood Cream, Saffron, and Peach */
+  background: linear-gradient(-45deg, #fff5ec, #ffe8d6, #ffdac4, #ffecd2) !important;
+  background-size: 400% 400% !important;
+  animation: dynamicIndianGradient 12s ease infinite !important;
 }
 
-@keyframes dynamicGradient {
+@keyframes dynamicIndianGradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 .home-hero::before {
+  content: "";
+  position: absolute;
   width: 140%;
   height: 100%;
   left: -20%;
@@ -198,16 +207,6 @@ img {
   animation: nebulaDrift 14s ease-in-out infinite alternate;
 }
 
-.home-hero::after {
-  width: 100%;
-  height: 100%;
-  left: 0;
-  bottom: 0;
-  border-radius: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.6));
-  pointer-events: none;
-}
-
 .hero-layout {
   position: relative;
   z-index: 2;
@@ -217,26 +216,25 @@ img {
   align-items: center;
 }
 
-/* Glassmorphism Effect for Content Boxes */
 .hero-copy {
   padding: 40px;
   border-radius: var(--radius-lg);
 }
 
 .home-hero .hero-copy {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 24px 50px rgba(189, 137, 57, 0.12);
+  background: rgba(255, 255, 255, 0.65) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 186, 62, 0.4) !important;
+  box-shadow: 0 24px 50px rgba(189, 137, 57, 0.15);
 }
 
 .home-hero .hero-copy p {
-  color: #3b2a1a; /* Deep grounded brown */
+  color: #4a1c0d !important;
   font-weight: 500;
 }
 
 .home-hero .hero-copy h1 {
-  color: #4a1c0d; /* Deep Maroon/Henna */
+  color: #4a1c0d !important;
 }
 
 .hero-display {
@@ -247,8 +245,8 @@ img {
 }
 
 .hero-display span {
-  color: #e65100; /* Vivid Saffron */
-  text-shadow: 0 2px 10px rgba(230, 81, 0, 0.15);
+  color: #d84315 !important;
+  text-shadow: none !important;
 }
 
 .mystic-particles {
@@ -288,6 +286,7 @@ img {
   color: #d84315;
   border: 1px solid rgba(230, 81, 0, 0.2);
   font-weight: 700;
+  margin-bottom: 12px;
 }
 
 h1,
@@ -298,16 +297,13 @@ h3 {
   line-height: 1.2;
 }
 
-h1 {
-  font-size: clamp(2rem, 3.4vw, 3rem);
-}
+h1 { font-size: clamp(2rem, 3.4vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2.15rem); }
+h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
 
-h2 {
-  font-size: clamp(1.5rem, 2.5vw, 2.15rem);
-}
-
-h3 {
-  font-size: clamp(1.15rem, 1.6vw, 1.34rem);
+.hero-copy p {
+  margin: 0 0 18px;
+  color: var(--ink-soft);
 }
 
 .hero-metrics {
@@ -362,7 +358,6 @@ h3 {
 .btn-primary {
   background: linear-gradient(120deg, #e65100, #ff9800);
   color: #fff;
-  border: 1px solid rgba(255, 152, 0, 0.8);
   box-shadow: 0 10px 25px rgba(230, 81, 0, 0.3);
 }
 
@@ -374,7 +369,6 @@ h3 {
   background: #ffffff;
   color: #4a1c0d;
   border: 1px solid rgba(212, 167, 75, 0.6);
-  box-shadow: 0 10px 20px rgba(212, 167, 75, 0.15);
 }
 
 .btn-outline {
@@ -392,9 +386,9 @@ h3 {
 }
 
 .home-hero .hero-side {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(14px) !important;
+  border: 1px solid rgba(255, 186, 62, 0.3) !important;
   box-shadow: 0 24px 50px rgba(189, 137, 57, 0.1);
 }
 
@@ -474,32 +468,17 @@ h3 {
 }
 
 .checklist li {
-  border-left: 3px solid var(--aqua);
+  border-left: 3px solid #e65100;
   padding-left: 12px;
-  color: var(--ink-soft);
+  color: #4a1c0d !important;
+  font-weight: 500;
   font-size: 0.92rem;
 }
 
 .home-hero .checklist li {
-  color: #5d2a02;
-  font-weight: 500;
+  color: #4a1c0d !important;
   border-left-color: #e65100;
 }
-
-.note {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.home-hero .note {
-  color: #8d5d36;
-  font-weight: 600;
-  margin-top: 15px;
-}
-
-/* =========================================
-   REMAINDER OF SITE STYLES
-========================================= */
 
 .grid {
   display: grid;
@@ -799,8 +778,7 @@ textarea {
 
 .footer {
   margin-top: 64px;
-  background: #0d2335;
-  color: rgba(255, 255, 255, 0.85);
+  background: #091521 !important;
   padding: 42px 0 24px;
 }
 
@@ -815,14 +793,15 @@ textarea {
   margin-bottom: 10px;
 }
 
-.footer a {
-  color: rgba(255, 255, 255, 0.95);
+.footer p, .footer a, .footer small {
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
-.footer small {
-  display: block;
-  margin-top: 12px;
-  color: rgba(255, 255, 255, 0.9);
+.note {
+  font-size: 0.78rem;
+  color: #8d5d36 !important;
+  font-weight: 600;
+  margin-top: 15px;
 }
 
 .chatbot-widget {
