@@ -58,14 +58,15 @@
 
   const contactForm = document.getElementById("contact-form");
   if (contactForm) {
-    contactForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const topic = document.getElementById("topic").value;
-      const message = document.getElementById("message").value.trim();
+    const contactFormNote = document.getElementById("contact-form-note");
 
+    function setContactNote(text, isError) {
+      if (!contactFormNote) return;
+      contactFormNote.textContent = text;
+      contactFormNote.style.color = isError ? "#b42318" : "";
+    }
+
+    function openMailFallback(name, phone, email, topic, message) {
       const rawBody = [
         "Name: " + name,
         "Phone: " + phone,
@@ -79,6 +80,64 @@
       const subject = encodeURIComponent("Destini Numbers Inquiry - " + topic);
       const body = encodeURIComponent(rawBody);
       window.location.href = "mailto:destininumbers37@gmail.com?subject=" + subject + "&body=" + body;
+    }
+
+    contactForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const topic = document.getElementById("topic").value;
+      const message = document.getElementById("message").value.trim();
+      const submitButton = contactForm.querySelector("button[type='submit']");
+      const serviceIdField = document.getElementById("service-id");
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+      }
+
+      const payload = {
+        name: name,
+        phone: phone,
+        email: email,
+        topic: topic,
+        message: message
+      };
+
+      if (serviceIdField && serviceIdField.value) {
+        const numericServiceId = Number(serviceIdField.value);
+        if (!Number.isNaN(numericServiceId) && numericServiceId > 0) {
+          payload.service_id = numericServiceId;
+        }
+      }
+
+      try {
+        const response = await fetch("api/submit-contact.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || "Unable to submit inquiry.");
+        }
+
+        contactForm.reset();
+        setContactNote("Your inquiry has been submitted successfully. Our team will contact you shortly.", false);
+      } catch (error) {
+        setContactNote("Server setup is incomplete, so your email app is opening as fallback.", true);
+        openMailFallback(name, phone, email, topic, message);
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit Inquiry";
+        }
+      }
     });
   }
 
