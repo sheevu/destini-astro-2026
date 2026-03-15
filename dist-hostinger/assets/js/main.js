@@ -1,4 +1,12 @@
 (function () {
+  function runWhenIdle(task) {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(task, { timeout: 1200 });
+    } else {
+      window.setTimeout(task, 120);
+    }
+  }
+
   const navToggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
 
@@ -33,28 +41,30 @@
     });
   });
 
-  const revealElements = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && revealElements.length) {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.16 }
-    );
+  runWhenIdle(function () {
+    const revealElements = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window && revealElements.length) {
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.16 }
+      );
 
-    revealElements.forEach(function (element) {
-      observer.observe(element);
-    });
-  } else {
-    revealElements.forEach(function (element) {
-      element.classList.add("show");
-    });
-  }
+      revealElements.forEach(function (element) {
+        observer.observe(element);
+      });
+    } else {
+      revealElements.forEach(function (element) {
+        element.classList.add("show");
+      });
+    }
+  });
 
   const contactForm = document.getElementById("contact-form");
   if (contactForm) {
@@ -141,22 +151,25 @@
     });
   }
 
-  const hero = document.querySelector(".home-hero");
-  if (hero && window.matchMedia("(min-width: 981px)").matches) {
-    const parallaxTargets = hero.querySelectorAll("[data-parallax]");
-    hero.addEventListener("mousemove", function (event) {
-      const rect = hero.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      parallaxTargets.forEach(function (target) {
-        const depth = Number(target.getAttribute("data-parallax")) || 8;
-        target.style.transform = "translate(" + x * depth + "px," + y * depth + "px)";
+  runWhenIdle(function () {
+    const hero = document.querySelector(".home-hero");
+    if (hero && window.matchMedia("(min-width: 981px)").matches) {
+      const parallaxTargets = hero.querySelectorAll("[data-parallax]");
+      hero.addEventListener("mousemove", function (event) {
+        const rect = hero.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        parallaxTargets.forEach(function (target) {
+          const depth = Number(target.getAttribute("data-parallax")) || 8;
+          target.style.transform = "translate(" + x * depth + "px," + y * depth + "px)";
+        });
       });
-    });
-  }
+    }
+  });
 
-  const chatbotWidget = document.getElementById("chatbot-widget");
-  if (chatbotWidget) {
+  runWhenIdle(function () {
+    const chatbotWidget = document.getElementById("chatbot-widget");
+    if (!chatbotWidget) return;
     const toggle = document.getElementById("chatbot-toggle");
     const panel = document.getElementById("chatbot-panel");
     const close = document.getElementById("chatbot-close");
@@ -218,10 +231,7 @@
         respond(intent);
       });
     });
-  }
-
-  const sliderPrevButtons = document.querySelectorAll("[data-slider-prev]");
-  const sliderNextButtons = document.querySelectorAll("[data-slider-next]");
+  });
 
   function scrollSlider(targetId, direction) {
     const track = document.getElementById(targetId);
@@ -231,30 +241,35 @@
     track.scrollBy({ left: direction * step, behavior: "smooth" });
   }
 
-  sliderPrevButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const targetId = button.getAttribute("data-slider-prev");
-      scrollSlider(targetId, -1);
-    });
-  });
+  runWhenIdle(function () {
+    const sliderPrevButtons = document.querySelectorAll("[data-slider-prev]");
+    const sliderNextButtons = document.querySelectorAll("[data-slider-next]");
 
-  sliderNextButtons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const targetId = button.getAttribute("data-slider-next");
-      scrollSlider(targetId, 1);
+    sliderPrevButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const targetId = button.getAttribute("data-slider-prev");
+        scrollSlider(targetId, -1);
+      });
     });
-  });
 
-  const sliderTracks = document.querySelectorAll("[data-slider-track]");
-  sliderTracks.forEach(function (track) {
-    track.addEventListener("keydown", function (event) {
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        track.scrollBy({ left: 280, behavior: "smooth" });
-      } else if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        track.scrollBy({ left: -280, behavior: "smooth" });
-      }
+    sliderNextButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        const targetId = button.getAttribute("data-slider-next");
+        scrollSlider(targetId, 1);
+      });
+    });
+
+    const sliderTracks = document.querySelectorAll("[data-slider-track]");
+    sliderTracks.forEach(function (track) {
+      track.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          track.scrollBy({ left: 280, behavior: "smooth" });
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          track.scrollBy({ left: -280, behavior: "smooth" });
+        }
+      });
     });
   });
 })();

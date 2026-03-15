@@ -26,7 +26,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Sora", "Segoe UI", sans-serif;
+  font-family: "SoraLocal", "Segoe UI", sans-serif;
   color: var(--ink);
   background: radial-gradient(circle at 12% 8%, #fff3de 0, transparent 34%),
     radial-gradient(circle at 88% 12%, #d8f6f2 0, transparent 28%),
@@ -63,10 +63,14 @@ p {
 
 .section {
   padding: 88px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 720px;
 }
 
 .section-tight {
   padding: 64px 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 520px;
 }
 
 .surface {
@@ -97,7 +101,7 @@ p {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Cinzel", Georgia, serif;
+  font-family: "CinzelLocal", Georgia, serif;
   font-weight: 700;
   letter-spacing: 0.6px;
   color: #fff8e2;
@@ -301,7 +305,7 @@ h1,
 h2,
 h3 {
   margin: 0 0 14px;
-  font-family: "Cinzel", Georgia, serif;
+  font-family: "CinzelLocal", Georgia, serif;
   line-height: 1.2;
 }
 
@@ -312,6 +316,54 @@ h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
 .hero-copy p {
   margin: 0 0 18px;
   color: var(--ink-soft);
+}
+
+.hero-subhead {
+  font-size: 1.25rem;
+  color: #f7d8a3;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.hero-support {
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.hero-hindi-subhead {
+  font-size: 0.95rem;
+  color: #f4c88c;
+  margin: 0 0 18px;
+  font-style: italic;
+}
+
+.hero-orbit {
+  animation: heroOrbitDrift 18s ease-in-out infinite;
+}
+
+.orbit-ring {
+  animation-name: heroRingSpin;
+  animation-duration: 24s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.orbit-core {
+  animation: heroCorePulse 12s ease-in-out infinite;
+}
+
+.lead {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+
+.card-meta,
+.case-meta {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #4c3b23;
 }
 
 .hero-metrics {
@@ -490,7 +542,7 @@ h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
 
 .grid {
   display: grid;
-  gap: 20px;
+  gap: 28px;
 }
 
 .grid-2 {
@@ -516,7 +568,7 @@ h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
 
 .card-title {
   margin: 0 0 8px;
-  font-family: "Cinzel", Georgia, serif;
+  font-family: "CinzelLocal", Georgia, serif;
 }
 
 .service-icon-wrap {
@@ -641,6 +693,13 @@ h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
 
 .tool-panel {
   padding: 24px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255, 176, 71, 0.18), transparent 25%),
+    radial-gradient(circle at 90% 14%, rgba(30, 182, 173, 0.15), transparent 25%),
+    rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(212, 167, 75, 0.28);
 }
 
 .tabs {
@@ -658,15 +717,23 @@ h3 { font-size: clamp(1.15rem, 1.6vw, 1.34rem); }
   color: var(--ink);
   font-size: 0.86rem;
   cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
 }
 
 .tab.active {
   background: linear-gradient(120deg, var(--gold), #efc877);
   border-color: transparent;
+  box-shadow: 0 8px 18px rgba(212, 167, 75, 0.28);
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(19, 35, 56, 0.14);
 }
 
 .tool-section {
   display: none;
+  animation: fadeInUp 300ms ease;
 }
 
 .tool-section.active {
@@ -695,22 +762,81 @@ select {
   background: rgba(255, 255, 255, 0.95);
   padding: 11px 12px;
   font: inherit;
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(214, 130, 11, 0.8);
+  box-shadow: 0 0 0 3px rgba(230, 161, 58, 0.2);
+  background: #fff;
 }
 
 textarea {
   min-height: 112px;
 }
 
+.field-hint {
+  margin: 6px 0 0;
+  font-size: 0.77rem;
+  color: #5b6472;
+}
+
+.btn-mini {
+  font-size: 0.82rem;
+  padding: 10px 14px;
+}
+
 .report-box {
   margin-top: 18px;
-  border-radius: var(--radius-md);
-  border: 1px dashed rgba(11, 27, 43, 0.25);
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.76);
+  border-radius: 18px;
+  border: 1px solid rgba(212, 167, 75, 0.36);
+  padding: 22px;
+  background: linear-gradient(150deg, rgba(13, 24, 48, 0.94), rgba(22, 39, 70, 0.92));
+  color: #fff7ea;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 44px rgba(9, 17, 38, 0.34);
 }
 
 .report-box h3 {
   margin-bottom: 8px;
+  color: #ffd98a;
+}
+
+.report-kicker {
+  margin: 0 0 6px;
+  display: inline-flex;
+  padding: 6px 11px;
+  border: 1px solid rgba(255, 203, 102, 0.4);
+  border-radius: 999px;
+  font-size: 0.74rem;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #ffe8b9;
+  background: rgba(255, 198, 73, 0.12);
+}
+
+.report-subtitle {
+  margin: 0 0 14px;
+  color: rgba(255, 236, 203, 0.9);
+  font-size: 0.88rem;
+}
+
+.report-aura {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  right: -60px;
+  top: -80px;
+  background:
+    radial-gradient(circle, rgba(255, 191, 68, 0.26), transparent 62%),
+    radial-gradient(circle, rgba(55, 186, 170, 0.2), transparent 68%);
+  pointer-events: none;
+  animation: auraPulse 5.6s ease-in-out infinite;
 }
 
 .report-grid {
@@ -720,14 +846,27 @@ textarea {
 }
 
 .result-line {
-  border-radius: 10px;
-  background: rgba(31, 182, 170, 0.09);
-  padding: 10px;
-  font-size: 0.88rem;
+  border-radius: 12px;
+  background: linear-gradient(140deg, rgba(27, 52, 92, 0.72), rgba(22, 81, 78, 0.4));
+  border: 1px solid rgba(255, 205, 113, 0.2);
+  padding: 12px;
+  font-size: 0.9rem;
+  animation: fadeInUp 340ms ease both;
 }
 
 .result-line strong {
   display: block;
+  color: #ffd786;
+  font-size: 0.82rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.result-line .result-hi {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 234, 195, 0.88);
+  font-size: 0.81rem;
 }
 
 .store-badge {
@@ -1068,6 +1207,67 @@ textarea {
   }
 }
 
+@keyframes heroOrbitDrift {
+  0%, 100% {
+    transform: translateY(-4%) scale(1);
+  }
+  50% {
+    transform: translateY(4%) scale(1.02);
+  }
+}
+
+@keyframes heroRingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heroCorePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(255, 152, 0, 0.3);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 40px rgba(255, 152, 0, 0.45);
+  }
+}
+
+@keyframes auraPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body[data-page="tools"] .page-hero {
+  padding-bottom: 34px;
+}
+
+body[data-page="tools"] .section {
+  padding-top: 40px;
+  padding-bottom: 56px;
+}
+
+body[data-page="tools"] .tool-panel {
+  margin-top: -32px;
+}
+
 @media (max-width: 980px) {
   .hero-layout,
   .split,
@@ -1152,7 +1352,10 @@ textarea {
   .btn,
   .tabs,
   .tool-form,
-  .nav-cta {
+  .nav-cta,
+  .report-kicker,
+  .report-subtitle,
+  .report-aura {
     display: none !important;
   }
 
