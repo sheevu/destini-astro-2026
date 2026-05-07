@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'CinzelLocal';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/cinzel-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'CinzelLocal';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/cinzel-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'CinzelLocal';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/cinzel-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'SoraLocal';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/sora-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'SoraLocal';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/sora-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'SoraLocal';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/sora-700.woff2') format('woff2');
+}
+
+body{font-family:'SoraLocal','Segoe UI',Tahoma,sans-serif}
+
+.brand,h1,h2,h3{font-family:'CinzelLocal',Georgia,serif}

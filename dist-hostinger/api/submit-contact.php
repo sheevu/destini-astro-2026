@@ -17,6 +17,10 @@ $email = trim((string)($input['email'] ?? ''));
 $phone = substr(trim((string)($input['phone'] ?? '')), 0, 20);
 $topic = trim((string)($input['topic'] ?? ''));
 $message = trim((string)($input['message'] ?? ''));
+$reportType = trim((string)($input['report_type'] ?? ''));
+$dob = trim((string)($input['dob'] ?? ''));
+$birthTime = trim((string)($input['birth_time'] ?? ''));
+$birthPlace = trim((string)($input['birth_place'] ?? ''));
 $serviceId = $input['service_id'] ?? null;
 
 if ($name === '' || $email === '' || $phone === '' || $message === '') {
@@ -47,6 +51,22 @@ if ($serviceId === '' || $serviceId === null) {
 $finalMessage = $message;
 if ($topic !== '') {
     $finalMessage = "[Inquiry Type: {$topic}]\n\n{$message}";
+}
+$extras = [];
+if ($reportType !== '') {
+    $extras[] = "Report Type: {$reportType}";
+}
+if ($dob !== '') {
+    $extras[] = "Date of Birth: {$dob}";
+}
+if ($birthTime !== '') {
+    $extras[] = "Birth Time: {$birthTime}";
+}
+if ($birthPlace !== '') {
+    $extras[] = "Birth Place: {$birthPlace}";
+}
+if ($extras) {
+    $finalMessage .= "\n\n" . implode("\n", $extras);
 }
 
 $connection = db();

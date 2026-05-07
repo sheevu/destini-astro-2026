@@ -73,6 +73,44 @@
     <section class="section reveal">
       <div class="container split">
         <article class="card">
+          <h2>Request the Free Alignment Report <span class="lang-hi">फ्री अलाइनमेंट रिपोर्ट मांगे</span></h2>
+          <p class="lead">Numerology only needs your DOB; KP Astrology needs birth time and place too. Share the preferred medium and we will deliver the crisp report.
+            <span class="lang-hi">न्यूमेरोलॉजी के लिए DOB, KP ज्योतिष के लिए समय और स्थान भेजें।</span>
+          </p>
+          <form class="alignment-form" data-topic="Contact Alignment Report">
+            <div class="alignment-form-grid">
+              <label for="align-name">Full Name | पूरा नाम</label>
+              <input id="align-name" name="name" type="text" required placeholder="Your full name">
+              <label for="align-email">Email | ईमेल</label>
+              <input id="align-email" name="email" type="email" required placeholder="email@example.com">
+              <label for="align-phone">Mobile / WhatsApp | मोबाइल</label>
+              <input id="align-phone" name="phone" type="tel" required placeholder="+91 72690 31175">
+            </div>
+            <label for="align-report">Report Type | रिपोर्ट प्रकार</label>
+            <select id="align-report" name="report_type" required>
+              <option value="Numerology (DOB only)">Numerology Report (DOB only)</option>
+              <option value="KP Astrology (DOB + Time + Place)">KP Astrology Report (DOB + time + place)</option>
+              <option value="Both Alignment + KP">Alignment + KP Astrology Report</option>
+            </select>
+            <div class="alignment-form-grid">
+              <label for="align-dob">Date of Birth | जन्म तिथि</label>
+              <input id="align-dob" name="dob" type="date" required>
+              <label for="align-time">Birth Time (KP) | जन्म समय</label>
+              <input id="align-time" name="birth_time" type="time">
+              <label for="align-place">Birth Place (KP) | जन्म स्थान</label>
+              <input id="align-place" name="birth_place" type="text" placeholder="City, Country">
+            </div>
+            <label for="align-message">Message / Challenge | संदेश</label>
+            <textarea id="align-message" name="message" required placeholder="Share what area you want clarity on.">Requesting the Free Alignment Report.</textarea>
+            <p class="note">Small report accessible by DOB for Numerology and time/place for KP Astrology. <span class="lang-hi">न्यूमेरोलॉजी में DOB, KP में समय और स्थान साझा करें।</span></p>
+            <p class="form-note" aria-live="polite"></p>
+            <div class="btn-row">
+              <button class="btn btn-primary" type="submit">Send Alignment Request</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="card">
           <h2>Send a Detailed Inquiry <span class="lang-hi">विस्तृत जानकारी भेजें</span></h2>
           <form id="contact-form">
             <label for="name">Full Name | पूरा नाम</label>
@@ -102,17 +140,15 @@
               <span class="lang-hi">आपकी जानकारी सुरक्षित रूप से सेव होती है। सर्वर सेटअप पूरा न होने पर ईमेल ऐप खुल जाएगा।</span>
             </p>
           </form>
-        </article>
-
-        <article class="card">
-          <h2>Direct Contact</h2>
-          <p><strong>Phone:</strong> <a href="tel:+917269031175">+91 7269031175</a></p>
-          <p><strong>Email:</strong> <a href="mailto:destininumbers37@gmail.com">destininumbers37@gmail.com</a></p>
-          <p><strong>Location:</strong> Lucknow, India</p>
-          <p><strong>Service Area:</strong> Pan-India online consultations</p>
-          <div class="btn-row" style="margin-top:14px;">
-            <a class="btn btn-secondary" href="https://wa.me/917269031175?text=Hello%20Destini%20Numbers%2C%20I%20need%20guidance." target="_blank" rel="noopener">Start WhatsApp Chat</a>
-            <a class="btn btn-outline" href="services.html">Browse Services</a>
+          <div class="contact-details" style="margin-top:18px;">
+            <p><strong>Phone:</strong> <a href="tel:+917269031175">+91 7269031175</a></p>
+            <p><strong>Email:</strong> <a href="mailto:destininumbers37@gmail.com">destininumbers37@gmail.com</a></p>
+            <p><strong>Location:</strong> Lucknow, India</p>
+            <p><strong>Service Area:</strong> Pan-India online consultations</p>
+            <div class="btn-row" style="margin-top:14px;">
+              <a class="btn btn-secondary" href="https://wa.me/917269031175?text=Hello%20Destini%20Numbers%2C%20I%20need%20guidance." target="_blank" rel="noopener">Start WhatsApp Chat</a>
+              <a class="btn btn-outline" href="services.html">Browse Services</a>
+            </div>
           </div>
         </article>
       </div>

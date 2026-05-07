@@ -41,6 +41,73 @@
     });
   });
 
+  const moonSunPredictions = {
+    Aries: {
+      moon: "Calm emotional fire before impulsive leaps.",
+      sun: "Lead with clarity and keep promises."
+    },
+    Taurus: {
+      moon: "Honor comfort but stay open to new ideas.",
+      sun: "Anchor resources and protect boundaries."
+    },
+    Gemini: {
+      moon: "Share feelings; curiosity supports the people around you.",
+      sun: "Clarify ideas before scattering energy."
+    },
+    Cancer: {
+      moon: "Protect your circle and trust intuition.",
+      sun: "Lay emotional foundations for steady impact."
+    },
+    Leo: {
+      moon: "Balance stage energy with gentle listening.",
+      sun: "Shine with generosity while honoring rest."
+    },
+    Virgo: {
+      moon: "Organize feelings with supportive rituals.",
+      sun: "Craft service with practical detail."
+    },
+    Libra: {
+      moon: "Seek private harmony before public compromise.",
+      sun: "Weigh partnerships using fairness."
+    },
+    Scorpio: {
+      moon: "Transform emotions with gentle trust.",
+      sun: "Channel intensity into purposeful commitments."
+    },
+    Sagittarius: {
+      moon: "Match optimism with grounded wisdom.",
+      sun: "Plan adventures with disciplined timing."
+    },
+    Capricorn: {
+      moon: "Let vulnerability build steady trust.",
+      sun: "Advance goals while honoring healthy limits."
+    },
+    Aquarius: {
+      moon: "Share unusual ideas without losing your grounding.",
+      sun: "Lead teams with innovation and empathy."
+    },
+    Pisces: {
+      moon: "Honor dreams while listening to practical needs.",
+      sun: "Serve others with compassion and clear boundaries."
+    }
+  };
+
+  function formatMoonSunNotes() {
+    const moonLines = [];
+    const sunLines = [];
+    Object.entries(moonSunPredictions).forEach(function ([sign, notes]) {
+      moonLines.push(sign + ": " + notes.moon);
+      sunLines.push(sign + ": " + notes.sun);
+    });
+    const html =
+      "<strong>Moon Sign Notes</strong><br>" +
+      moonLines.join("<br>") +
+      "<br><strong>Sun Sign Notes</strong><br>" +
+      sunLines.join("<br>");
+    const text = "Moon signs: " + moonLines.join(" | ") + ". Sun signs: " + sunLines.join(" | ") + ".";
+    return { html: html, text: text };
+  }
+
   runWhenIdle(function () {
     const revealElements = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window && revealElements.length) {
@@ -173,6 +240,14 @@
     const toggle = document.getElementById("chatbot-toggle");
     const panel = document.getElementById("chatbot-panel");
     const close = document.getElementById("chatbot-close");
+    const quickContainer = chatbotWidget.querySelector(".chatbot-quick");
+    if (quickContainer && !quickContainer.querySelector("[data-chatbot-intent='moon-sun']")) {
+      const moonButton = document.createElement("button");
+      moonButton.type = "button";
+      moonButton.dataset.chatbotIntent = "moon-sun";
+      moonButton.textContent = "Moon/Sun Insights";
+      quickContainer.appendChild(moonButton);
+    }
     const quickButtons = chatbotWidget.querySelectorAll("[data-chatbot-intent]");
     const replyNode = document.getElementById("chatbot-reply");
     const openWhatsApp = document.getElementById("chatbot-open-whatsapp");
@@ -180,26 +255,35 @@
 
     function respond(intent) {
       if (!replyNode) return;
-      let message = "I can help with services, store items, report interpretation, and bookings.";
+      let messageText = "I can help with services, store items, report interpretation, and bookings.";
+      let messageHtml = messageText;
       if (intent === "services") {
-        message = "For services: Career Alignment, Business Numerology, Personal Destiny Reading, and premium packages are available.";
+        messageText = "For services: Career Alignment, Business Numerology, Personal Destiny Reading, and premium packages are available.";
+        messageHtml = messageText;
       } else if (intent === "store") {
-        message = "For store: crystals, gemstones, rudraksha (1-14 Mukhi), and puja kits are available with guidance.";
+        messageText = "For store: crystals, gemstones, rudraksha (1-14 Mukhi), and puja kits are available with guidance.";
+        messageHtml = messageText;
       } else if (intent === "reports") {
-        message = "For reports: share your generated Life Path, Compatibility, or House Number result and get personalized guidance.";
+        messageText = "For reports: share your generated Life Path, Compatibility, or House Number result and get personalized guidance.";
+        messageHtml = messageText;
       } else if (intent === "booking") {
-        message = "For booking: you can connect on WhatsApp directly and select the best consultation format.";
+        messageText = "For booking: you can connect on WhatsApp directly and select the best consultation format.";
+        messageHtml = messageText;
+      } else if (intent === "moon-sun") {
+        const notes = formatMoonSunNotes();
+        messageText = notes.text;
+        messageHtml = notes.html;
       }
 
       replyNode.innerHTML =
-        message +
+        messageHtml +
         " For callback support, please fill this form: " +
         '<a class="chatbot-form-link" href="' +
         formLink +
         '" target="_blank" rel="noopener">Callback Form</a>.';
 
       if (openWhatsApp) {
-        const text = encodeURIComponent(message + " I have also submitted the callback form.");
+        const text = encodeURIComponent(messageText + " I have also submitted the callback form.");
         openWhatsApp.href = "https://wa.me/917269031175?text=" + text;
       }
     }
@@ -231,6 +315,83 @@
         respond(intent);
       });
     });
+  });
+
+  runWhenIdle(function () {
+    const alignmentForms = document.querySelectorAll(".alignment-form");
+    if (!alignmentForms.length) return;
+
+    alignmentForms.forEach(function (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        submitAlignmentForm(form);
+      });
+    });
+
+    async function submitAlignmentForm(form) {
+      const statusNode = form.querySelector(".form-note");
+      const submitButton = form.querySelector("button[type='submit']");
+      const originalButtonText = submitButton ? submitButton.textContent.trim() : "Submit";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      const formData = new FormData(form);
+      const name = (formData.get("name") || "").trim();
+      const email = (formData.get("email") || "").trim();
+      const phone = ((formData.get("phone") || "").trim()).slice(0, 20);
+      const topic = form.dataset.topic || "Free Alignment Report";
+      const message = (formData.get("message") || "").trim() || "Requesting the Free Alignment Report.";
+      const reportType = (formData.get("report_type") || "").trim();
+      const dob = (formData.get("dob") || "").trim();
+      const birthTime = (formData.get("birth_time") || "").trim();
+      const birthPlace = (formData.get("birth_place") || "").trim();
+
+      const payload = {
+        name: name,
+        email: email,
+        phone: phone,
+        topic: topic,
+        message: message
+      };
+
+      if (reportType) payload.report_type = reportType;
+      if (dob) payload.dob = dob;
+      if (birthTime) payload.birth_time = birthTime;
+      if (birthPlace) payload.birth_place = birthPlace;
+
+      try {
+        const response = await fetch("api/submit-contact.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || "Unable to submit alignment request.");
+        }
+
+        form.reset();
+        setStatus("Alignment request submitted. We will reply shortly with your report.", false);
+      } catch (error) {
+        setStatus("Unable to submit the alignment request. Please message us on WhatsApp.", true);
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+
+      function setStatus(text, isError) {
+        if (!statusNode) return;
+        statusNode.textContent = text;
+        statusNode.style.color = isError ? "#b42318" : "";
+      }
+    }
   });
 
   function scrollSlider(targetId, direction) {
